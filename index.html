@@ -26,9 +26,9 @@
   </a>
 
   <div class="right menu"  id="logout_div" onclick="logout()">
-    <button class="ui secondary button" >
+    <a class="ui secondary button" >
       Logout
-    </button>
+    </a>
   </div>
 </div>
 <div class="ui segment">
@@ -75,7 +75,7 @@
     <div class="field">
       <label>Password</label>
       <div class="ui left icon input">
-        <input type="Password" id="password_fieldNew">
+        <input type="password" id="password_fieldNew">
         <i class="lock icon"></i>
       </div>
     </div>
@@ -125,14 +125,14 @@
       <p>
         <label for="new-task">Add Item</label><input id="new-task" type="text"><button>Add</button>
       </p>
-      
+
       <h3>Todo</h3>
       <ul id="incomplete-tasks">
         <li><input type="checkbox"><label>Pay Bills</label><input type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>
         <li class="editMode"><input type="checkbox"><label>Go Shopping</label><input type="text" value="Go Shopping"><button class="edit">Edit</button><button class="delete">Delete</button></li>
-        
+
       </ul>
-      
+
       <h3>Completed</h3>
       <ul id="completed-tasks">
         <li><input type="checkbox" checked><label>See the Doctor</label><input type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>
