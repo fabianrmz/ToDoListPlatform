@@ -118,25 +118,32 @@
 
 </div>
 
-<div class="gif" id="gif"><span id= "giphyme"></span></div>
-
+<div class="ui grid centered button"  data-tooltip="Here´s my API!!" data-position="top center" id="gif"><span id= "giphyme"></span></div>
+<br></br>
+<div class="ui four column doubling stackable grid container">
 
 <div class="container">
       <p>
-        <label for="new-task">Add Task</label><input id="new-task" type="text" placeholder="New Tas..."><button>Add</button>
+        <label for="new-task">
+          <div class="ui large label">
+  Add Task
+</div>
+</label><div class="ui input focus"><input id="new-task" type="text" placeholder="New Tas..."></div><button class="ui primary button">ADD</button>
       </p>
 
-      <h3>Pending</h3>
+      <h3><a class="ui blue ribbon label">PENDING</a></h3>
       <ul id="incomplete-tasks">
         <li><input type="checkbox"><label>Share this awesome tool</label><input type="text" ><button class="edit">Edit</button><button class="delete">Delete</button></li>
         <li><input type="checkbox" ><label>Register with the highest grade possible to Fabián</label><input type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>
       </ul>
 
-      <h3>Done</h3>
+      <h3><a class="ui teal ribbon label">Done</a></h3>
       <ul id="completed-tasks">
 
       </ul>
+      <br></br>
     </div>
+</div>
 
 
 
