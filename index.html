@@ -12,6 +12,10 @@
 <title>To Do List Platform</title>
 
 <link rel="stylesheet" type="text/css" href="theme.css">
+<script>
+  UPLOADCARE_PUBLIC_KEY = "bcd23c93213db95b34ca";
+</script>
+<script charset="utf-8" src="//ucarecdn.com/libs/widget/3.3.0/uploadcare.full.min.js"></script>
 </head>
 <body>
 
@@ -108,7 +112,9 @@
 
 
 <div id="user_div" class="loggedin-div"><!--ONLINE div starts-->
-  <input type="hidden" role="uploadcare-uploader" name="content" data-public-key="bcd23c93213db95b34ca" data-images-only onclick="updatephoto()"/>
+  <img class="ui left tiny circular image" src="https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif" >
+
+  <input  type="hidden" role="uploadcare-uploader" name="content" data-public-key="bcd23c93213db95b34ca" data-images-only onclick="updatephoto()"/>
   <div class="ui inverted segment">
 
     <p id="user_para"></p>
