@@ -105,7 +105,11 @@
 
 <div id="user_div" class="loggedin-div"><!--ONLINE div starts-->
   <div class="ui inverted segment">
+
     <p id="user_para"></p>
+
+    <p id="totalTasks"></p>
+    <br></br>
   <div class="ui inverted form">
     <div class="one field">
       <div class="field">
@@ -116,7 +120,7 @@
 
     <div class="ui submit button" onclick="addTask()">Add</div>
     <ul id="list">
-      <li>Share this awesome tool</li>
+
     </ul>
   </div>
 </div>
@@ -152,10 +156,26 @@
       return firebase.database().ref().child("users/"+(firebase.auth().currentUser.uid)).once("value", function(snapshot){
          var countador=snapshot.child("tasks").val();//Variabl int, numero de tasks actuales
 
-        countador+=1;
+         countador+=1;
+        var item=document.getElementById("task_input").value;
+        firebase.database().ref('users/'+(firebase.auth().currentUser.uid) +"/NTASK/"+countador).set({
+          task: item
+        });
+
          firebase.database().ref('users/'+(firebase.auth().currentUser.uid) ).set({
            tasks: countador
          });
+
+
+
+         var text=document.createTextNode(item);
+         var newitem=document.createElement("li");
+         newitem.appendChild(text);
+         document.getElementById("list").appendChild(newitem);
+
+
+
+
          document.getElementById('task_input').value='' ;
       });
 
@@ -192,7 +212,10 @@
 
         var email_id = user.email;
         document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
-
+        return firebase.database().ref().child("users/"+(firebase.auth().currentUser.uid)).once("value", function(snapshot){
+           var countador=snapshot.child("tasks").val();
+           document.getElementById("totalTasks").innerHTML = "Actual tasks done : " + countador;
+           });
       }
 
     } else {
