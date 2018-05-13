@@ -15,7 +15,11 @@ firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
         return firebase.database().ref().child("users/"+(firebase.auth().currentUser.uid)).once("value", function(snapshot){
            var countador=snapshot.child("tasks").val();
+           var completed=snapshot.child("completed").val();
+
+
            document.getElementById("totalTasks").innerHTML = "Actual tasks created : " + countador;
+           document.getElementById("totalDone").innerHTML = "Actual tasks completed : " + completed;
            });
       }
 
@@ -74,6 +78,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   //new task list item
   var createNewTaskElement = function(taskString) {
+
+
+
     //create list item
     var listItem = document.createElement("li");
 
@@ -113,6 +120,26 @@ firebase.auth().onAuthStateChanged(function(user) {
 
     //add new task
   var addTask = function() {
+
+
+    firebase.database().ref('users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+    var numeroTasks = snapshot.val().tasks;
+    var done = snapshot.val().completed;
+    numeroTasks+=1
+
+    document.getElementById("totalTasks").innerHTML = "Actual tasks created : " + numeroTasks;
+    firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
+    completed: done,
+    tasks: numeroTasks
+
+    });
+    });
+
+
+
+
+
+
     console.log("Add task...");
     //create new list item with text from #new-task:
     var listItem = createNewTaskElement(taskInput.value);
@@ -163,6 +190,29 @@ firebase.auth().onAuthStateChanged(function(user) {
   //mark a task as complete
   var taskCompleted = function() {
       updateDiv()
+
+
+
+
+
+
+      firebase.database().ref('users/' + firebase.auth().currentUser.uid).once('value').then(function(snapshot) {
+      var numeroTasks = snapshot.val().tasks;
+      var done = snapshot.val().completed;
+      done+=1
+
+      document.getElementById("totalTasks").innerHTML = "Actual tasks created : " + numeroTasks;
+      document.getElementById("totalDone").innerHTML = "Actual tasks completed : " + done;
+      firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
+      completed: done,
+      tasks: numeroTasks
+
+      });
+      });
+
+
+
+
       console.log("Complete task...");
 
       //append the task list item to the #completed-tasks
