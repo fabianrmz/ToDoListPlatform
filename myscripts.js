@@ -230,6 +230,7 @@ for(var i = 0; i <  completedTasksHolder.children.length; i++) {
 
 function updateDiv()
 {
+  window.alert("Good job!")
   q = "star wars"; // search query
 
   request = new XMLHttpRequest;
