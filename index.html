@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html ⚡ lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="canonical" href="article.amp.html">
+<script async src="https://cdn.ampproject.org/v0.js"></script>
+  <link rel="icon" href="images/logo.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<title>To Do List Platform</title>
+</head>
+<body>
+
+<div class="ui secondary pointing menu">
+  <a class="active item">
+    Home TDL
+  </a>
+
+  <div class="right menu"  id="logout_div">
+    <a class="ui item" onclick="logout()">
+      Logout
+    </a>
+  </div>
+</div>
+<div class="ui segment">
+
+
+
+  <div id="login_div" class="main-div">
+  <div class="column"><!--login div starts-->
+
+
+    <div class="ui two column middle aligned very relaxed stackable grid">
+  <div class="column">
+      <div class="field">
+        <label>Username</label>
+        <div class="ui left icon input">
+          <input type="text" placeholder="Username" id="email_field">
+          <i class="user icon"></i>
+        </div>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <div class="ui left icon input">
+          <input type="password" placeholder="******" id="password_field">
+          <i class="lock icon"></i>
+        </div>
+      </div>
+      <div class="ui blue submit button" onclick="login()">Login</div>
+  </div>
+  <div class="ui vertical divider">
+    Or
+  </div>
+  <div class="center aligned column">
+
+
+
+
+
+
+
+
+<div class="signup" id="signup">
+    <div class="field">
+      <label>Username</label>
+      <div class="ui left icon input">
+        <input type="text" placeholder="Username" id="email_fieldNew">
+        <i class="user icon"></i>
+      </div>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <div class="ui left icon input">
+        <input type="password" id="password_fieldNew">
+        <i class="lock icon"></i>
+      </div>
+    </div>
+    <div class="ui big green labeled icon button" onclick="signUp()">
+      <i class="signup icon" onclick="signUp()"></i>
+      Sign Up
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+</div><!--login IN or SIGN UP div finish-->
+
+<div class="ui vertical divider">
+  OR
+</div>
+
+</div>
+
+
+<div id="user_div" class="loggedin-div"><!--ONLINE div starts-->
+  <div class="ui inverted segment">
+    <p id="user_para"></p>
+  <div class="ui inverted form">
+    <div class="one field">
+      <div class="field">
+        <label>Add a new task</label>
+        <input placeholder="Do..." type="text" id="task_input">
+      </div>
+    </div>
+
+    <div class="ui submit button" onclick="addTask()">Add</div>
+    <ul id="list">
+      <li>Share this awesome tool</li>
+    </ul>
+  </div>
+</div>
+</div><!--ONLINE div finish-->
+
+</div>
+
+</div>
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCrZOVO2bbD8Wmt5Urcz64ybNXpgC4bGIw",
+    authDomain: "projectd-6f2a8.firebaseapp.com",
+    databaseURL: "https://projectd-6f2a8.firebaseio.com",
+    projectId: "projectd-6f2a8",
+    storageBucket: "projectd-6f2a8.appspot.com",
+    messagingSenderId: "149721998634"
+  };
+  firebase.initializeApp(config);
+
+  function addTask(){
+    var task = document.getElementById("task_input").value;
+
+    if(task!=""){
+
+
+      return firebase.database().ref().child("users/"+(firebase.auth().currentUser.uid)).once("value", function(snapshot){
+         var countador=snapshot.child("tasks").val();//Variabl int, numero de tasks actuales
+
+        countador+=1;
+         firebase.database().ref('users/'+(firebase.auth().currentUser.uid) ).set({
+           tasks: countador
+         });
+         document.getElementById('task_input').value='' ;
+      });
+
+
+
+
+
+
+
+
+
+    }else{
+      window.alert("You must write something to add");
+    }
+
+
+
+
+  }
+
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+
+      document.getElementById("user_div").style.display = "block";
+      document.getElementById("login_div").style.display = "none";
+      document.getElementById("logout_div").style.display = "block";
+
+
+      var user = firebase.auth().currentUser;
+
+      if(user != null){
+
+        var email_id = user.email;
+        document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
+
+      }
+
+    } else {
+      // No user is signed in.
+
+      document.getElementById("user_div").style.display = "none";
+      document.getElementById("login_div").style.display = "block";
+      document.getElementById("logout_div").style.display = "none";
+
+    }
+  });
+
+  function login(){
+
+    var userEmail = document.getElementById("email_field").value;
+    var userPass = document.getElementById("password_field").value;
+
+    firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+
+      window.alert("Error : " + errorMessage);
+
+      // ...
+    });
+
+  }
+
+  function logout(){
+    firebase.auth().signOut();
+  }
+
+
+  function signUp(){
+    var email = document.getElementById("email_fieldNew").value;
+    var password = document.getElementById("password_fieldNew").value;
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  window.alert("Error: "+errorMessage);
+  // ...
+});
+  }
+</script>
+
+
+
+</body>
+</html>
