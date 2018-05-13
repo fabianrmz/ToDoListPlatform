@@ -9,13 +9,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
 <script charset="utf-8" src="https://ucarecdn.com/libs/widget/3.3.0/uploadcare.full.min.js"></script>
-<title>To Do List Platform</title>
-
+<script src="giphy.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="theme.css">
 <script>
   UPLOADCARE_PUBLIC_KEY = "bcd23c93213db95b34ca";
 </script>
 <script charset="utf-8" src="//ucarecdn.com/libs/widget/3.3.0/uploadcare.full.min.js"></script>
+<title>To Do List Platform</title>
+
+
 </head>
 <body>
 
@@ -94,7 +97,7 @@
   </div>
 </div>
 
-#gif-wrap
+
 
 
 </div><!--login IN or SIGN UP div finish-->
@@ -116,6 +119,10 @@
     <p>*Checkbox to complete</p>
 
 </div>
+
+<div class="gif" id="gif"><span id= "giphyme"></span></div>
+
+
 <div class="container">
       <p>
         <label for="new-task">Add Task</label><input id="new-task" type="text" placeholder="New Tas..."><button>Add</button>
@@ -132,13 +139,14 @@
 
       </ul>
     </div>
+
+
+
 </div><!--ONLINE div finish-->
 
 </div>
 
 </div>
-
-
 
 
 
@@ -154,6 +162,9 @@
     messagingSenderId: "149721998634"
   };
   firebase.initializeApp(config);
+
+
+
 
 </script>
 <script src="myscripts.js"></script>
